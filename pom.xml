@@ -10,7 +10,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <skipTests>true</skipTests>
     </properties>
 
     <repositories>
@@ -40,7 +39,6 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <skipTests>${skipTests}</skipTests>
                 </configuration>
             </plugin>
         </plugins>
