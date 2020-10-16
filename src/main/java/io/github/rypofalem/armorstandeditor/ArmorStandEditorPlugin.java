@@ -19,14 +19,15 @@
 
 package io.github.rypofalem.armorstandeditor;
 
+import io.github.rypofalem.armorstandeditor.command.*;
 import io.github.rypofalem.armorstandeditor.language.Language;
+import io.github.rypofalem.armorstandeditor.manager.CommandManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -40,7 +41,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
     public final NamespacedKey editToolKey = new NamespacedKey(this, "ASE");
 
     // managers
-    private CommandEx execute;
+    private CommandManager commandManager;
     public PlayerEditorManager editorManager;
 
     // configs
@@ -66,15 +67,16 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+        // initialization
         initConfig();
         initLanguage();
         initCommands();
 
+        // instance
         lang = new Language(getConfig().getString("lang"), this);
         editorManager = new PlayerEditorManager(this);
 
-
+        // events
         getServer().getPluginManager().registerEvents(editorManager, this);
     }
 
@@ -90,7 +92,6 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
 
     private void initConfig() {
         updateConfig("", "config.yml");
-
 
         coarseRot = getConfig().getDouble("coarse");
         fineRot = getConfig().getDouble("fine");
@@ -110,18 +111,25 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
                 "zh.yml", "fr_FR.yml", "ro_RO.yml",
                 "ja_JP.yml", "de_DE.yml"
         };
-
         for (String s : availableLanguages) {
             updateConfig("lang/", s);
         }
-
         //English is the default language and needs to be unaltered to so that there is always a backup message string
         saveResource("lang/en_US.yml", true);
     }
 
     private void initCommands() {
-        execute = new CommandEx(this);
-        getCommand("ase").setExecutor(execute);
+        commandManager = new CommandManager("ase");
+
+        // register subcommands
+        commandManager.registerSubCommand(new AdjustmentCommand(this));
+        commandManager.registerSubCommand(new ToggleCommand(this));
+        commandManager.registerSubCommand(new AxisCommand(this));
+        commandManager.registerSubCommand(new HelpCommand(this));
+        commandManager.registerSubCommand(new ModeCommand(this));
+        commandManager.registerSubCommand(new SlotCommand(this));
+
+        this.getCommand(this.commandManager.getMainCommandName()).setExecutor(this.commandManager);
     }
 
     public void log(String message) {
@@ -137,6 +145,10 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
 
     public Language getLang() {
         return lang;
+    }
+
+    public CommandManager getCommandManager() {
+        return this.commandManager;
     }
 
     public boolean isEditTool(ItemStack item) {
