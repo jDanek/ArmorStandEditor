@@ -17,20 +17,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package io.github.rypofalem.armorstandeditor.modes;
+package io.github.rypofalem.armorstandeditor.api.modes;
 
-public enum EditMode {
-	NONE("None"), INVISIBLE("Invisible"), SHOWARMS("ShowArms"), GRAVITY("Gravity"), BASEPLATE("BasePlate"), SIZE("Size"), COPY("Copy"), PASTE("Paste"),
-	HEAD("Head"), BODY("Body"), LEFTARM("LeftArm"), RIGHTARM("RightArm"), LEFTLEG("LeftLeg"), RIGHTLEG("RightLeg"),
-	PLACEMENT("Placement"), DISABLESLOTS("DisableSlots"), ROTATE("Rotate"), EQUIPMENT("Equipment"), RESET("Reset");
-	
-	private String name;
-	
-	EditMode(String name){
-		this.name = name;
-	}
-	
-	public String toString(){
-		return name;
-	}
+public enum Adjustment {
+    COARSE("Coarse"),
+    FINE("Fine");
+
+    private String name;
+
+    Adjustment(String name) {
+        this.name = name;
+    }
+
+    public String toString() {
+        return name;
+    }
 }

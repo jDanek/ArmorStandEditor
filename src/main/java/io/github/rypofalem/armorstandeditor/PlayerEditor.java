@@ -21,11 +21,11 @@ package io.github.rypofalem.armorstandeditor;
 
 import io.github.rypofalem.armorstandeditor.menu.EquipmentMenu;
 import io.github.rypofalem.armorstandeditor.menu.Menu;
-import io.github.rypofalem.armorstandeditor.modes.AdjustmentMode;
+import io.github.rypofalem.armorstandeditor.api.modes.Adjustment;
 import io.github.rypofalem.armorstandeditor.modes.ArmorStandData;
-import io.github.rypofalem.armorstandeditor.modes.Axis;
+import io.github.rypofalem.armorstandeditor.api.modes.Axis;
 import io.github.rypofalem.armorstandeditor.modes.CopySlots;
-import io.github.rypofalem.armorstandeditor.modes.EditMode;
+import io.github.rypofalem.armorstandeditor.api.modes.EditMode;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -45,7 +45,7 @@ public class PlayerEditor {
 	public ArmorStandEditorPlugin plugin;
 	private UUID uuid;
 	EditMode eMode;
-	AdjustmentMode adjMode;
+	Adjustment adjMode;
 	CopySlots copySlots;
 	Axis axis;
 	double eulerAngleChange;
@@ -62,7 +62,7 @@ public class PlayerEditor {
 		this.uuid =uuid;
 		this.plugin = plugin;
 		eMode = EditMode.NONE;
-		adjMode = AdjustmentMode.COARSE;
+		adjMode = Adjustment.COARSE;
 		axis = Axis.X;
 		copySlots = new CopySlots();
 		eulerAngleChange = getManager().coarseAdj;
@@ -81,9 +81,9 @@ public class PlayerEditor {
 		sendMessage("setaxis", axis.toString().toLowerCase());
 	}
 
-	public void setAdjMode(AdjustmentMode adjMode){
+	public void setAdjMode(Adjustment adjMode){
 		this.adjMode = adjMode;
-		if(adjMode == AdjustmentMode.COARSE){
+		if(adjMode == Adjustment.COARSE){
 			eulerAngleChange = getManager().coarseAdj;
 			movChange = getManager().coarseMov;
 		}else{

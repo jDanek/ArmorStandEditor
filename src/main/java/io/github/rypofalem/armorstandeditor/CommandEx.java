@@ -19,9 +19,9 @@
 
 package io.github.rypofalem.armorstandeditor;
 
-import io.github.rypofalem.armorstandeditor.modes.AdjustmentMode;
-import io.github.rypofalem.armorstandeditor.modes.Axis;
-import io.github.rypofalem.armorstandeditor.modes.EditMode;
+import io.github.rypofalem.armorstandeditor.api.modes.Adjustment;
+import io.github.rypofalem.armorstandeditor.api.modes.Axis;
+import io.github.rypofalem.armorstandeditor.api.modes.EditMode;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -33,7 +33,7 @@ public class CommandEx implements CommandExecutor{
 	ArmorStandEditorPlugin plugin;
 	final String LISTMODE = ChatColor.GREEN + "/ase mode <" + Util.getEnumList(EditMode.class) + ">";
 	final String LISTAXIS = ChatColor.GREEN + "/ase axis <" + Util.getEnumList(Axis.class) + ">";
-	final String LISTADJUSTMENT = ChatColor.GREEN + "/ase adj <" + Util.getEnumList(AdjustmentMode.class) + ">";
+	final String LISTADJUSTMENT = ChatColor.GREEN + "/ase adj <" + Util.getEnumList(Adjustment.class) + ">";
 	final String LISTSLOT =  ChatColor.GREEN + "/ase slot <1-9>";
 	final String HELP = ChatColor.GREEN + "/ase help";
 
@@ -108,7 +108,7 @@ public class CommandEx implements CommandExecutor{
 		}
 
 		if(args.length > 1){
-			for(AdjustmentMode adj : AdjustmentMode.values()){
+			for(Adjustment adj : Adjustment.values()){
 				if(adj.toString().toLowerCase().contentEquals(args[1].toLowerCase())){
 					plugin.editorManager.getPlayerEditor(player.getUniqueId()).setAdjMode(adj);
 					return;
