@@ -81,7 +81,6 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
     }
 
 
-
     @Override
     public void onDisable() {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {

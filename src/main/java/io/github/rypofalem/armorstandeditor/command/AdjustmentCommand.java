@@ -61,7 +61,7 @@ public class AdjustmentCommand extends SubCommand {
         List<String> result = new ArrayList<>();
         if (args.length == 2) {
             for (String a : arguments) {
-                if (a.toLowerCase().startsWith(args[args.length-1].toLowerCase())) {
+                if (a.toLowerCase().startsWith(args[args.length - 1].toLowerCase())) {
                     result.add(a.toLowerCase());
                 }
             }

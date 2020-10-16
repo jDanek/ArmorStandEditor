@@ -1,7 +1,6 @@
 package io.github.rypofalem.armorstandeditor.api.commands;
 
 import io.github.rypofalem.armorstandeditor.ArmorStandEditorPlugin;
-import io.github.rypofalem.armorstandeditor.manager.CommandManager;
 import org.bukkit.entity.Player;
 
 import java.util.List;
