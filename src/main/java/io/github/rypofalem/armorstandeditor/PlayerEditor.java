@@ -400,11 +400,11 @@ public class PlayerEditor {
 
     void sendMessage(String path, String format, String option) {
         String message = plugin.getLang().getMessage(path, format, option);
-        if (plugin.sendToActionBar) {
-            plugin.getServer().getPlayer(getUUID()).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
-        } else {
-            plugin.getServer().getPlayer(getUUID()).sendMessage(message);
-        }
+
+        plugin.getServer().getPlayer(getUUID()).spigot().sendMessage(
+                (plugin.sendToActionBar ? ChatMessageType.ACTION_BAR : ChatMessageType.CHAT),
+                new TextComponent(message));
+
     }
 
     void sendMessage(String path, String option) {
