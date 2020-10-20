@@ -27,6 +27,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -155,7 +156,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
     public boolean isEditTool(ItemStack item) {
         if (item == null) return false;
         if (editTool != item.getType()) return false;
-        if (requireToolData && item.getDurability() != (short) editToolData) return false;
+        if (requireToolData && ((Damageable) item.getItemMeta()).getDamage() != editToolData) return false;
         if (requireToolLore && editToolLore != null) {
             if (!item.hasItemMeta()) return false;
             if (!item.getItemMeta().hasLore()) return false;
