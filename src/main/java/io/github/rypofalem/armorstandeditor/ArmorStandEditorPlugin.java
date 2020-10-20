@@ -50,6 +50,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
     public boolean requireToolData = false;
     public boolean sendToActionBar = true;
     public int editToolData = Integer.MIN_VALUE;
+    public boolean requireSneaking = false;
     public boolean requireToolLore = false;
     public String editToolLore = null;
     public boolean requireToolKey = false; // Not configurable through config, since it's up to plugin to hook into
@@ -97,6 +98,7 @@ public class ArmorStandEditorPlugin extends JavaPlugin {
         String toolType = getConfig().getString("tool", "FLINT");
         editTool = Material.getMaterial(toolType);
         requireToolData = getConfig().getBoolean("requireToolData", false);
+        requireSneaking = getConfig().getBoolean("requireSneaking",false);
         if (requireToolData) editToolData = getConfig().getInt("toolData", Integer.MIN_VALUE);
         requireToolLore = getConfig().getBoolean("requireToolLore", false);
         if (requireToolLore) editToolLore = getConfig().getString("toolLore", null);
